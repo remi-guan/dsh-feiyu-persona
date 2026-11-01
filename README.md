@@ -48,9 +48,25 @@
 
 ## 怎么用
 
-**在 DSH 里**：正文塞进 `dsh-persona-dafeiyu` 的人设库（`~/.dsh/storages/dsh-persona-dafeiyu/personas.json` 的 `text` 字段），`suffix.md` 的一行行放进 profile 的 `cordis.patch.yml` 那个人设插件的 `suffix:` 块，`examples/` 放到笔记目录里，再在 AGENTS.md 里指一条「这三种情况先读它」。
+它就是一个 DSH 插件，包里只有一条人设、只做全局生效。没有工作区档、没有会话档，也没有多装几套人设的入口——想要别的角色，改这套正文就是了。
 
-**别的 agent 上**：`persona.md` 直接当系统提示的人设段用，`suffix.md` 拼在每次请求的末尾。`examples/` 要不要带取决于上下文预算，不带也能跑。
+```bash
+dsh plugin --profile desktop add /Users/remiguan/Projects/dsh-feiyu-persona
+```
+
+装完在「设置 → 小鱼」里能直接改两栏：左边 `persona.md` 的正文，右边 `suffix.md` 的那 15 行语气规矩。保存后下一个请求就生效，不用重启，也不用去翻 `cordis.patch.yml`。
+
+内容存在 `<DSH_HOME>/feiyu-persona/persona.json`，第一次打开时用包里自带的 `persona.md` 和 `suffix.md` 铺底。读不懂这个文件就当没读过，回落到自带正文——不会静默把你的字清掉。
+
+**别的 agent 上**：`persona.md` 直接当系统提示的人设段，`suffix.md` 拼在每次请求的末尾。`examples/` 要不要带取决于上下文预算，不带也能跑。
+
+## 话术提醒
+
+语气规矩挂在系统提示词里，聊到几十万 token 之后就变成背景音了。插件会盯着上下文长度：每长 15000 token（或者她自己又写出去 15000 token，比如跑完一个长任务），就在下一轮开口之前补一次那 15 行。
+
+这个数字在 `cordis.patch.yml` 的 `suffixEchoTokens` 里改，设成 0 就是关掉。按 token 而不是按对话轮数，是因为轮数和注意力没关系——十轮都在读文件，和一轮写完一个模块，完全不是一回事。
+
+提醒走的是 `systemPrompt.context`（追加在末尾），不是改 section：section 一变，整段系统提示词的前缀缓存全废，而缓存读便宜十倍。
 
 ## 改它的时候
 

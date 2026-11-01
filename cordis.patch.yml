@@ -1,0 +1,18 @@
+# dsh-feiyu-persona bundle patch
+#
+# 把「小鱼」这一行插进 profile 的插件树。装法二选一：
+#   dsh plugin --profile desktop add <本仓库路径>
+#   或在 Web 的插件页安装本包
+#
+# 只有一条人设、只做全局生效：没有工作区档、没有会话档，也没有多套人设库。
+# 正文和语气都落在 <DSH_HOME>/feiyu-persona/persona.json，设置页里直接改。
+#
+# 这里的 config 只有两个字段：
+#   enabled: false            临时闭嘴（设置页会显示已停用）
+#   suffixEchoTokens: 15000   上下文又长胖这么多 token 就补一次话术提醒；0 = 关
+- insert:
+    - id: feiyu-persona
+      name: dsh-feiyu-persona
+      config:
+        enabled: true
+        suffixEchoTokens: 15000

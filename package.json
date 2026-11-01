@@ -1,0 +1,32 @@
+{
+  "name": "dsh-feiyu-persona",
+  "version": "0.1.0",
+  "description": "一条蓝色小鲸鱼女仆人设的 DeepSeek Harness 插件：一条人设、全局生效，正文和语气规矩都能在设置页直接改，聊久了按 token 自动补一次话术提醒。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "persona.md",
+    "suffix.md",
+    "cordis.patch.yml",
+    "assets",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "persona",
+    "plugin"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/verify.mjs"
+  }
+}
