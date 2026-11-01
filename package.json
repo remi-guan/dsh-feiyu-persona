@@ -28,5 +28,15 @@
   "license": "MIT",
   "scripts": {
     "test": "node test/verify.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.1-rc.5": "compatible"
+      }
+    }
   }
 }
